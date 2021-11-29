@@ -5,4 +5,4 @@
 * Thymeleaf
 
 
-login, message, validation, redis 연습
+login, message, validation 연습
