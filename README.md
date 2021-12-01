@@ -4,5 +4,4 @@
 * SpringBoot
 * Thymeleaf
 
-
-login, message, validation 연습
+message, validation
