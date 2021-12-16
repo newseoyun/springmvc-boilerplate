@@ -1,5 +1,6 @@
 package sy.study;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -11,14 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@Slf4j
 public class HelloController {
 
 
     @GetMapping("/hi")
     public String hi() {
+        sendRequest();
         return "hi";
     }
 
+    @GetMapping("/oauth/kakao") // 프로퍼티 확인필요
+    public void fromKakao(String code) {
+        log.info(code);
+    }
 
 
 
@@ -27,8 +34,8 @@ public class HelloController {
         headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
 
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("client_id", "");
-        params.add("redirect_uri", "http://localhost:8080");
+        params.add("client_id", ""); // TODO: id값 등 별도 관리
+        params.add("redirect_uri", "http://localhost:8080/auth/kakao");
         params.add("response_type", "code");
 
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
